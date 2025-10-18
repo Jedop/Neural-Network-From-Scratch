@@ -8,28 +8,6 @@ from nn_library.model import NeuralNetwork
 import argparse
 from utils import load_data, shape_data 
 
-def train_data(x_train1, x_test1, y_train, y_test, epochs=41, batch_size=256, lr=0.001, output_size=10, layers=2, size=[100, 100], activation=[]):
-    if layers > len(size):
-        for i in range(layers - len(size)):
-            size.append(100)
-    elif layers < len(size):
-        size = size [0: layers]
-    print(layers, size)
-    nn = NeuralNetwork(input_size=x_train1.shape[0], size=size, alpha=lr, output_size=output_size, layers=layers, activation=activation)
-
-    for epoch in range(epochs):
-        for i in range(0, x_train1.shape[1], batch_size):
-            X_batch = x_train1[:, i:i+batch_size]
-            Y_batch = y_train[i:i+batch_size]
-            nn.forward_propagation(X_batch)
-            nn.backward_propagation(X_batch, Y_batch)
-            nn.update_parameters()
-
-        if epoch % 5 == 0:
-            print(f"Epoch {epoch}: train acc = {nn.accuracy(x_train1, y_train):.4f}")
-
-    nn.save()
-
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(description='Train a neural network on the MNIST dataset.')
     parser.add_argument('--epochs', type=int, default=41, help='Number of training epochs.')
@@ -44,17 +22,15 @@ if __name__ == '__main__':
     x_train, y_train, x_test, y_test = load_data()
     x_train1, y_train, x_test1, y_test = shape_data(x_train, y_train, x_test, y_test)
 
-    # Train
-    train_data(
-        x_train1=x_train1,
-        x_test1=x_test1,
-        y_train=y_train,
-        y_test=y_test,
-        epochs=args.epochs,
-        batch_size=args.batch_size,
-        lr=args.lr,
+    nn = NeuralNetwork(
+        input_size=x_train1.shape[0], 
+        size=args.size, 
+        alpha=args.lr, 
         output_size=args.output_size,
         layers=args.layers,
-        size=args.size,
-        activation=args.activation,
+        activation=args.activation
     )
+
+    nn.fit(epochs=args.epochs, batch_size=args.batch_size, X=x_train1, Y=y_train)
+
+    nn.save()
