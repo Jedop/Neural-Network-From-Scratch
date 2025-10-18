@@ -1,7 +1,9 @@
-import numpy as np # linear algebra
-import struct
-from array import array
-from os.path  import join
+try:
+    import cupy as np
+    print("GPU (CuPy) detected. Running on GPU.")
+except ImportError:
+    import numpy as np
+    print("GPU (CuPy) not found. Running on CPU with NumPy.")
 from nn_library.model import NeuralNetwork
 import argparse
 from utils import load_data, shape_data 
