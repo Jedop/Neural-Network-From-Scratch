@@ -1,4 +1,9 @@
-import cupy as np
+try:
+    import cupy as np
+    print("GPU (CuPy) detected. Running on GPU.")
+except ImportError:
+    import numpy as np
+    print("GPU (CuPy) not found. Running on CPU with NumPy.")
 
 def softmax(Z, derivative : bool = 0):
     Z_shift = Z - np.max(Z, axis=0, keepdims=True)  # subtract column max
