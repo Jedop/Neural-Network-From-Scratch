@@ -1,5 +1,10 @@
 import argparse
-import cupy as np
+try:
+    import cupy as np
+    print("GPU (CuPy) detected. Running on GPU.")
+except ImportError:
+    import numpy as np
+    print("GPU (CuPy) not found. Running on CPU with NumPy.")
 import numpy as npx 
 import matplotlib.pyplot as plt
 from nn_library.model import NeuralNetwork
