@@ -65,6 +65,7 @@ A deep neural network built in Python from scratch, using only NumPy and CuPy, c
 ### Prerequisites
 
 Ensure you have Python 3.10+ installed.
+Nvidia GPU is required to make use of the CuPy module.
 
 ### Installation
 
