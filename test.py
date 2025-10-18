@@ -4,9 +4,6 @@ try:
 except ImportError:
     import numpy as np
     print("GPU (CuPy) not found. Running on CPU with NumPy.")
-import struct
-from array import array
-from os.path  import join
 from nn_library.model import NeuralNetwork
 import argparse
 from utils import load_data, shape_data  
