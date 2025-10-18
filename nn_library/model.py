@@ -1,4 +1,9 @@
-import cupy as np
+try:
+    import cupy as np
+    print("GPU (CuPy) detected. Running on GPU.")
+except ImportError:
+    import numpy as np
+    print("GPU (CuPy) not found. Running on CPU with NumPy.")
 import numpy as npx 
 from .activations import activation_functions, one_hot
 import os
