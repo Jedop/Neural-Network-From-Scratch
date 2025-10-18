@@ -9,7 +9,16 @@ from .activations import activation_functions, one_hot
 import os
 
 class NeuralNetwork():
-    def __init__(self, alpha, activation: list = [], size : list =[10], input_size=28*28, layers=1, output_size=10):
+    def __init__(self, alpha: float, activation: list = [], size : list =[10], input_size: int =28*28, layers: int =1, output_size: int =10):
+        
+        # Checking layers and size compatibility
+        
+        if layers > len(size):
+            for i in range(layers - len(size)):
+                size.append(100)
+        elif layers < len(size):
+            size = size [0: layers]
+        
         size.insert(0, input_size)
         size.append(output_size)
 
@@ -92,6 +101,18 @@ class NeuralNetwork():
         for i in range(len(self.W)):
             self.W[i] = self.W[i] - self.alpha * self.m_hat[i] / (np.sqrt(self.v_hat[i]) + 1e-8)
             self.b[i] = self.b[i] - self.alpha * self.db[i]
+
+    def fit(self, epochs: int, batch_size: int, X, Y):
+        for epoch in range(epochs):
+            for i in range(0, X.shape[1], batch_size):
+                X_batch = X[:, i:i+batch_size]
+                Y_batch = Y[i:i+batch_size]
+                self.forward_propagation(X_batch)
+                self.backward_propagation(X_batch, Y_batch)
+                self.update_parameters()
+
+            if epoch % 5 == 0:
+                print(f"Epoch {epoch}: train acc = {self.accuracy(X, Y):.4f}")
 
     def save(self, path="models/model_weights.npz"):
         os.makedirs(os.path.dirname(path), exist_ok=True)
