@@ -14,6 +14,8 @@ A deep neural network built in Python from scratch, using only NumPy and CuPy, c
 
 ## Performance for various settings
 
+This from-scratch neural network achieved a **peak accuracy of 97.7%** on the MNIST test set.
+
 <table>
 <tr>
 <th>Sample Model 1</th>
@@ -40,13 +42,13 @@ A deep neural network built in Python from scratch, using only NumPy and CuPy, c
 | Hidden 1 | 10 | ReLU |
 | Output | 10 | Softmax |
 <br>
-<b>Accuracy:</b> 98.1%
+<b>Accuracy:</b> 97.7%
 
 </td>
 </tr>
 </table>
 
-> *Demonstrating two example architectures trained using the same generalized network code. Note: Final accuracy can vary between training runs due to random weight initialization.*
+> *Demonstrating two example architectures trained using the same generalized network code. Note: Final accuracy can vary between training runs due to random weight initialization. In this comparison, the simpler 1-layer model slightly outperformed the 2-layer model, a common phenomenon in machine learning where simpler models can sometimes offer better generalization on unseen data.*
 
 ## Key features
 
