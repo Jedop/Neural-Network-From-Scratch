@@ -5,7 +5,7 @@ A deep neural network built in Python from scratch, using only NumPy and CuPy, c
 ## A Visual of the training process
 |Loss Evolution|Accuracy Evolution|
 |--------------|------------------|
-|![Loss Evolution](graphs/loss_progress.gif)|![Accuracy Evolution](graphs/accuracy_progress.gif)|
+|![Loss Evolution](graphs/loss_progress_loop.gif)|![Accuracy Evolution](graphs/accuracy_progress_loop.gif)|
 
 ## Prediction Samples
 <p align="center">
