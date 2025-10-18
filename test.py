@@ -1,4 +1,9 @@
-import numpy as np # linear algebra
+try:
+    import cupy as np
+    print("GPU (CuPy) detected. Running on GPU.")
+except ImportError:
+    import numpy as np
+    print("GPU (CuPy) not found. Running on CPU with NumPy.")
 import struct
 from array import array
 from os.path  import join
