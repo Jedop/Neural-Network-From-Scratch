@@ -51,7 +51,12 @@ def load_data():
     return x_train, y_train, x_test, y_test
 
 def shape_data(x_train, y_train, x_test, y_test):
-    import cupy as np
+    try:
+        import cupy as np
+        print("GPU (CuPy) detected. Running on GPU.")
+    except ImportError:
+        import numpy as np
+    print("GPU (CuPy) not found. Running on CPU with NumPy.")
     np.random.seed(0)
     np._default_memory_pool.free_all_blocks()
 
